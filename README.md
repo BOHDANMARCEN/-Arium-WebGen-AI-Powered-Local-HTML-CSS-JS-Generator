@@ -298,6 +298,8 @@ We welcome contributions! Please read [CONTRIBUTING.md](CONTRIBUTING.md) for det
 
 ## 📚 Documentation
 
+- [Architecture 3.0](docs/ARCHITECTURE.md) - Comprehensive architecture document with diagrams and implementation plan
+- [Architecture 3.0 Starter Code](docs/ARCHITECTURE_3_STARTER.md) - Full project description with ready-to-use starter code
 - [Provider Setup](docs/PROVIDERS.md)
 - [API Documentation](docs/API.md)
 - [Development](docs/DEVELOPMENT.md)

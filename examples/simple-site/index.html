@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Home</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: Inter, system-ui, sans-serif; line-height: 1.6; color: #111; }
+    .site-header { background: #0b5fff; color: white; padding: 1rem; }
+    .site-header a { color: white; text-decoration: none; margin-right: 1rem; }
+    .hero { text-align: center; padding: 4rem 2rem; }
+    .hero h1 { font-size: 3rem; margin-bottom: 1rem; }
+    .site-footer { background: #111; color: white; text-align: center; padding: 2rem; }
+  </style>
+</head>
+<body>
+  <!-- component: header -->
+  <main>
+    <!-- component: hero -->
+  </main>
+  <!-- component: footer -->
+  <script>
+    // Live reload snippet
+    try {
+      const ws = new WebSocket('ws://localhost:3333');
+      ws.onmessage = (m) => { if (m.data === 'reload') location.reload(); };
+    } catch(e) {}
+  </script>
+</body>
+</html>
+

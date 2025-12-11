@@ -1,0 +1,14 @@
+{
+  "name": "Arium Default",
+  "colors": {
+    "primary": "#0b5fff",
+    "accent": "#ff6b6b",
+    "bg": "#ffffff",
+    "text": "#111111"
+  },
+  "typography": {
+    "base": "16px",
+    "font": "Inter, system-ui, sans-serif"
+  }
+}
+

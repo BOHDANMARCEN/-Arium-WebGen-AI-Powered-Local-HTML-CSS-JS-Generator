@@ -75,6 +75,36 @@ yarn install
 pnpm install
 ```
 
+### Two Ways to Use
+
+#### Option 1: Web App (Current - 2.0)
+
+Run the Next.js web application:
+
+```bash
+npm run dev
+```
+
+Open [http://localhost:3000](http://localhost:3000) to use the web interface.
+
+#### Option 2: CLI Tool (New - 3.0)
+
+Use the command-line interface for project management:
+
+```bash
+# Initialize a new project
+npm run cli -- init my-site
+
+# Build project
+cd my-site
+npm run cli -- build
+
+# Start preview server
+npm run cli -- preview
+```
+
+See [CLI_README.md](CLI_README.md) for full CLI documentation.
+
 3. **Configure environment variables:**
 
 Create a `.env.local` file in the project root:
@@ -300,6 +330,8 @@ We welcome contributions! Please read [CONTRIBUTING.md](CONTRIBUTING.md) for det
 
 - [Architecture 3.0](docs/ARCHITECTURE.md) - Comprehensive architecture document with diagrams and implementation plan
 - [Architecture 3.0 Starter Code](docs/ARCHITECTURE_3_STARTER.md) - Full project description with ready-to-use starter code
+- [CLI Documentation](CLI_README.md) - Command-line interface guide
+- [Migration Guide](docs/MIGRATION.md) - Migrating from 2.0 to 3.0
 - [Provider Setup](docs/PROVIDERS.md)
 - [API Documentation](docs/API.md)
 - [Development](docs/DEVELOPMENT.md)

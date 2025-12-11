@@ -4,8 +4,11 @@ import { useEffect, useState } from "react"
 
 export function LoadingScreen() {
   const [glitchClass, setGlitchClass] = useState("")
+  const [isMounted, setIsMounted] = useState(false)
 
   useEffect(() => {
+    setIsMounted(true)
+    
     // Apply glitch effect at intervals
     const glitchInterval = setInterval(() => {
       setGlitchClass("glitch")
@@ -15,20 +18,24 @@ export function LoadingScreen() {
     return () => clearInterval(glitchInterval)
   }, [])
 
+  // Ensure consistent rendering on server and client
+  const loadingText = "LOADING, PLEASE WAIT..."
+
   return (
     <div className="fixed inset-0 flex flex-col items-center justify-center bg-black">
       <h1
         className={`text-4xl md:text-6xl font-bold tracking-wider text-white mb-8 ${glitchClass}`}
         style={{ fontFamily: "'Space Mono', monospace" }}
+        suppressHydrationWarning
       >
-        LOADING, PLEASE WAIT...
+        {loadingText}
       </h1>
 
       <div className="relative w-24 h-24 flex items-center justify-center">
         <div className="w-20 h-20 border-4 border-gray-600 border-t-white rounded-full animate-spin"></div>
       </div>
 
-      <style jsx global>{`
+      <style jsx>{`
         @keyframes glitch {
           0% {
             transform: translate(0);

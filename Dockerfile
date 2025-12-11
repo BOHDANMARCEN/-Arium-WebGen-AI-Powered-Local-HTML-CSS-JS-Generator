@@ -4,7 +4,7 @@ FROM node:20-alpine
 RUN apk add --no-cache git
 
 # Clone repository
-RUN git clone https://github.com/weise25/LocalSite-ai.git /app
+RUN git clone https://github.com/BOHDANMARCEN/-Arium-WebGen-AI-Powered-Local-HTML-CSS-JS-Generator.git /app
 
 # Set working directory
 WORKDIR /app

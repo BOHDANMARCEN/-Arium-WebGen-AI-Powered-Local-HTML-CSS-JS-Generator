@@ -86,43 +86,40 @@ export function ProviderSelector({
   }
 
   return (
-    <div className="w-full mb-6">
-      <label className="block text-sm font-medium text-gray-300 mb-2">SELECT PROVIDER</label>
-      <Select value={selectedProvider} onValueChange={handleProviderChange}>
-        <SelectTrigger className="w-full bg-gray-900/80 border-gray-800 focus:border-white focus:ring-white text-white">
-          <SelectValue placeholder="Choose an AI provider..." />
-        </SelectTrigger>
-        <SelectContent className="bg-gray-900 border-gray-800 text-white">
-          {isLoading ? (
-            <div className="flex items-center justify-center py-2">
-              <Loader2 className="w-4 h-4 mr-2 animate-spin" />
-              <span>Loading providers...</span>
-            </div>
-          ) : providers.length > 0 ? (
-            providers.map((provider) => (
-              <SelectItem key={provider.id} value={provider.id}>
-                <div className="flex flex-col">
-                  <span>{provider.name}</span>
-                  <span className="text-xs text-gray-400">{provider.description}</span>
-                  {provider.examples && provider.examples.length > 0 && (
-                    <div className="mt-1 flex flex-wrap gap-1">
-                      {provider.examples.map((example, index) => (
-                        <span key={index} className="inline-flex items-center rounded-full bg-gray-800 px-2 py-0.5 text-xs text-gray-300">
-                          {example}
-                        </span>
-                      ))}
-                    </div>
-                  )}
-                </div>
-              </SelectItem>
-            ))
-          ) : (
-            <div className="p-2 text-sm text-gray-400">
-              No providers available
-            </div>
-          )}
-        </SelectContent>
-      </Select>
-    </div>
+    <Select value={selectedProvider} onValueChange={handleProviderChange}>
+      <SelectTrigger className="w-full bg-white/10 border-white/10 text-white hover:bg-white/15 focus:ring-cyan-500">
+        <SelectValue placeholder="Оберіть постачальника..." />
+      </SelectTrigger>
+      <SelectContent className="bg-[#0a1b2d] border-white/10 text-white">
+        {isLoading ? (
+          <div className="flex items-center justify-center py-2">
+            <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+            <span>Завантаження постачальників...</span>
+          </div>
+        ) : providers.length > 0 ? (
+          providers.map((provider) => (
+            <SelectItem key={provider.id} value={provider.id} className="hover:bg-white/10">
+              <div className="flex flex-col">
+                <span>{provider.name}</span>
+                <span className="text-xs text-neutral-400">{provider.description}</span>
+                {provider.examples && provider.examples.length > 0 && (
+                  <div className="mt-1 flex flex-wrap gap-1">
+                    {provider.examples.map((example, index) => (
+                      <span key={index} className="inline-flex items-center rounded-full bg-white/10 px-2 py-0.5 text-xs text-neutral-300">
+                        {example}
+                      </span>
+                    ))}
+                  </div>
+                )}
+              </div>
+            </SelectItem>
+          ))
+        ) : (
+          <div className="p-2 text-sm text-neutral-400">
+            Постачальники недоступні
+          </div>
+        )}
+      </SelectContent>
+    </Select>
   )
 }

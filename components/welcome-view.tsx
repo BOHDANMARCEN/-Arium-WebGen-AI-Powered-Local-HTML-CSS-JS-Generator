@@ -46,18 +46,9 @@ export function WelcomeView({
   setMaxTokens,
   onGenerate
 }: WelcomeViewProps) {
-  const [titleClass, setTitleClass] = useState("pre-animation")
   const [models, setModels] = useState<Model[]>([])
   const [isLoadingModels, setIsLoadingModels] = useState(false)
-
-  useEffect(() => {
-    // Add typing animation class after component mounts
-    const timer = setTimeout(() => {
-      setTitleClass("typing-animation")
-    }, 100)
-
-    return () => clearTimeout(timer)
-  }, [])
+  const [logoError, setLogoError] = useState(false)
 
   useEffect(() => {
     // Load available models when the component mounts or when the provider changes
@@ -118,119 +109,141 @@ export function WelcomeView({
     }
 
     fetchModels()
-  }, [selectedProvider, setSelectedModel])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selectedProvider])
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center p-4 relative overflow-hidden bg-black">
-      {/* Animated background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-black via-gray-900 to-black z-0 animate-pulse-slow"></div>
+    <div className="min-h-screen w-full bg-gradient-to-b from-[#04070a] to-[#0a1b2d] text-white px-6 py-12">
+      <div className="max-w-4xl mx-auto space-y-10">
+        {/* Лого */}
+        <div className="flex flex-col items-center gap-3">
+          <img 
+            src={logoError ? '/placeholder-logo.png' : '/logo-webgen.png'} 
+            alt="Arium WebGen Logo"
+            className="w-24 opacity-90 drop-shadow-[0_0_20px_#00eaff]"
+            onError={() => {
+              // Fallback to placeholder if logo doesn't exist
+              setLogoError(true)
+            }}
+          />
+          <h1 className="text-4xl md:text-5xl font-bold tracking-[.25em] text-center">
+            ARIUM WEBGEN
+          </h1>
+          <p className="text-neutral-400 text-center -mt-2">
+            AI-Powered Local HTML/CSS/JS Generator
+          </p>
+        </div>
 
-      {/* Content */}
-      <div className="relative z-10 w-full max-w-2xl mx-auto flex flex-col items-center">
-        <h1
-          className={`text-4xl md:text-6xl font-bold tracking-wider text-white mb-12 ${titleClass}`}
-          style={{ fontFamily: "'Space Mono', monospace" }}
-        >
-          WHAT ARE WE BUILDING?
-        </h1>
+        {/* Опис */}
+        <div className="text-center max-w-2xl mx-auto text-lg text-neutral-300 leading-relaxed">
+          Опиши, що саме ти хочеш створити — і AI згенерує повноцінну веб-сторінку.
+        </div>
 
-        <div className="relative w-full mb-6">
+        {/* Текстове поле */}
+        <div className="bg-white/5 backdrop-blur-md p-6 rounded-2xl border border-white/10 shadow-[0_0_20px_#00eaff20]">
           <Textarea
             value={prompt}
             onChange={(e) => setPrompt(e.target.value)}
-            placeholder="Describe the website you want to create..."
-            className="min-h-[150px] w-full bg-gray-900/80 border-gray-800 focus:border-white focus:ring-white text-white placeholder:text-gray-500 pr-[120px] transition-all duration-300"
+            placeholder="Опиши дизайн, стиль та функціональність майбутнього сайту..."
+            className="w-full h-40 bg-transparent outline-none resize-none text-lg placeholder-neutral-500 text-white border-0 focus-visible:ring-0 focus-visible:ring-offset-0"
           />
-          <Button
-            onClick={onGenerate}
-            disabled={!prompt.trim() || !selectedModel}
-            className="absolute bottom-4 right-4 bg-gray-900/90 hover:bg-gray-800 text-white font-medium tracking-wider py-3 px-12 text-base rounded-md transition-all duration-300 border border-gray-800 hover:border-gray-700 focus:border-white focus:ring-white"
-          >
-            GENERATE
-          </Button>
         </div>
 
-        <ProviderSelector
-          selectedProvider={selectedProvider}
-          setSelectedProvider={setSelectedProvider}
-          onProviderChange={() => {}}
-        />
-
-        <div className="w-full mb-4">
-          <label className="block text-sm font-medium text-gray-300 mb-2">SELECT MODEL</label>
-          <Select value={selectedModel} onValueChange={setSelectedModel} disabled={!selectedProvider || isLoadingModels}>
-            <SelectTrigger className="w-full bg-gray-900/80 border-gray-800 focus:border-white focus:ring-white text-white">
-              <SelectValue placeholder={selectedProvider ? "Choose a model..." : "Select a provider first"} />
-            </SelectTrigger>
-            <SelectContent className="bg-gray-900 border-gray-800 text-white">
-              {isLoadingModels ? (
-                <div className="flex items-center justify-center py-2">
-                  <Loader2 className="w-4 h-4 mr-2 animate-spin" />
-                  <span>Loading models...</span>
-                </div>
-              ) : models.length > 0 ? (
-                // Use index + ID as key to avoid duplicates
-                models.map((model, index) => (
-                  <SelectItem key={`${index}-${model.id}`} value={model.id}>
-                    {model.name}
-                  </SelectItem>
-                ))
-              ) : (
-                <div className="p-2 text-sm text-gray-400">
-                  {selectedProvider ? "No models available" : "Select a provider first"}
-                </div>
-              )}
-            </SelectContent>
-          </Select>
-        </div>
-
-        <div className="w-full mb-4">
-          <label className="block text-sm font-medium text-gray-300 mb-2">SYSTEM PROMPTS</label>
-          <Select value={selectedSystemPrompt} onValueChange={setSelectedSystemPrompt}>
-            <SelectTrigger className="w-full bg-gray-900/80 border-gray-800 focus:border-white focus:ring-white text-white">
-              <SelectValue placeholder="Choose a system prompt..." />
-            </SelectTrigger>
-            <SelectContent className="bg-gray-900 border-gray-800 text-white">
-              <SelectItem value="default">
-                <div className="flex flex-col">
-                  <span>Default</span>
-                  <span className="text-xs text-gray-400">Standard code generation</span>
-                </div>
-              </SelectItem>
-              <SelectItem value="thinking">
-                <div className="flex flex-col">
-                  <span>Thinking</span>
-                  <span className="text-xs text-gray-400">Makes non thinking models think</span>
-                </div>
-              </SelectItem>
-              <SelectItem value="custom">
-                <div className="flex flex-col">
-                  <span>Custom System Prompt</span>
-                  <span className="text-xs text-gray-400">Specify a custom System Prompt</span>
-                </div>
-              </SelectItem>
-            </SelectContent>
-          </Select>
-        </div>
-
-        {selectedSystemPrompt === 'custom' && (
-          <div className="w-full mb-4">
-            <label className="block text-sm font-medium text-gray-300 mb-2">CUSTOM SYSTEM PROMPT</label>
-            <Textarea
-              value={customSystemPrompt}
-              onChange={(e) => setCustomSystemPrompt(e.target.value)}
-              placeholder="Enter a custom system prompt to override the default..."
-              className="min-h-[100px] w-full bg-gray-900/80 border-gray-800 focus:border-white focus:ring-white text-white placeholder:text-gray-500 transition-all duration-300"
+        {/* Панель параметрів */}
+        <div className="grid md:grid-cols-2 gap-6 bg-white/5 p-6 rounded-2xl border border-white/10 backdrop-blur-md shadow-[0_0_20px_#00eaff10]">
+          {/* Постачальник */}
+          <div className="space-y-2">
+            <label className="text-sm text-neutral-400">Постачальник</label>
+            <ProviderSelector
+              selectedProvider={selectedProvider}
+              setSelectedProvider={setSelectedProvider}
+              onProviderChange={() => {}}
             />
-            <p className="mt-1 text-xs text-gray-400">
-              Your custom prompt will be used for this generation and subsequent regenerations.
-            </p>
           </div>
-        )}
 
-        <div className="w-full mb-8">
-          <label className="block text-sm font-medium text-gray-300 mb-2">MAX OUTPUT TOKENS</label>
-          <div className="flex items-center gap-4">
+          {/* Модель */}
+          <div className="space-y-2">
+            <label className="text-sm text-neutral-400">Модель</label>
+            <Select 
+              value={selectedModel} 
+              onValueChange={setSelectedModel} 
+              disabled={!selectedProvider || isLoadingModels}
+            >
+              <SelectTrigger className="bg-white/10 border-white/10 text-white hover:bg-white/15 focus:ring-cyan-500">
+                <SelectValue placeholder={selectedProvider ? "Оберіть модель..." : "Спочатку виберіть постачальника"} />
+              </SelectTrigger>
+              <SelectContent className="bg-[#0a1b2d] border-white/10 text-white">
+                {isLoadingModels ? (
+                  <div className="flex items-center justify-center py-2">
+                    <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                    <span>Завантаження моделей...</span>
+                  </div>
+                ) : models.length > 0 ? (
+                  models.map((model) => (
+                    <SelectItem key={model.id} value={model.id} className="hover:bg-white/10">
+                      <div className="flex flex-col">
+                        <span className="truncate max-w-[250px]">{model.name}</span>
+                        {model.id !== model.name && (
+                          <span className="text-xs text-neutral-500 truncate max-w-[250px]">{model.id}</span>
+                        )}
+                      </div>
+                    </SelectItem>
+                  ))
+                ) : (
+                  <div className="p-2 text-sm text-neutral-400">
+                    {selectedProvider ? "Моделі недоступні" : "Спочатку виберіть постачальника"}
+                  </div>
+                )}
+              </SelectContent>
+            </Select>
+          </div>
+
+          {/* Системні підказки */}
+          <div className="space-y-2 md:col-span-2">
+            <label className="text-sm text-neutral-400">Системні підказки</label>
+            <Select value={selectedSystemPrompt} onValueChange={setSelectedSystemPrompt}>
+              <SelectTrigger className="bg-white/10 border-white/10 text-white hover:bg-white/15 focus:ring-cyan-500">
+                <SelectValue placeholder="Оберіть системну підказку..." />
+              </SelectTrigger>
+              <SelectContent className="bg-[#0a1b2d] border-white/10 text-white">
+                <SelectItem value="default" className="hover:bg-white/10">
+                  <div className="flex flex-col">
+                    <span>Стандартна генерація</span>
+                    <span className="text-xs text-neutral-400">Стандартна генерація коду</span>
+                  </div>
+                </SelectItem>
+                <SelectItem value="thinking" className="hover:bg-white/10">
+                  <div className="flex flex-col">
+                    <span>Thinking режим</span>
+                    <span className="text-xs text-neutral-400">З процесом міркування</span>
+                  </div>
+                </SelectItem>
+                <SelectItem value="custom" className="hover:bg-white/10">
+                  <div className="flex flex-col">
+                    <span>Кастомна підказка</span>
+                    <span className="text-xs text-neutral-400">Власна системна підказка</span>
+                  </div>
+                </SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
+
+          {/* Кастомна системна підказка */}
+          {selectedSystemPrompt === 'custom' && (
+            <div className="space-y-2 md:col-span-2">
+              <label className="text-sm text-neutral-400">Кастомна системна підказка</label>
+              <Textarea
+                value={customSystemPrompt}
+                onChange={(e) => setCustomSystemPrompt(e.target.value)}
+                placeholder="Введіть кастомну системну підказку..."
+                className="min-h-[100px] w-full bg-white/10 border-white/10 text-white placeholder:text-neutral-500 focus-visible:ring-cyan-500"
+              />
+            </div>
+          )}
+
+          {/* Макс. токени */}
+          <div className="space-y-2 md:col-span-2">
+            <label className="text-sm text-neutral-400">Макс. токени</label>
             <Input
               type="number"
               value={maxTokens || ''}
@@ -238,67 +251,28 @@ export function WelcomeView({
                 const value = e.target.value ? parseInt(e.target.value, 10) : undefined;
                 setMaxTokens(value && !isNaN(value) && value > 0 ? value : undefined);
               }}
-              placeholder="Default (model dependent)"
-              className="w-full bg-gray-900/80 border-gray-800 focus:border-white focus:ring-white text-white placeholder:text-gray-500 transition-all duration-300"
+              placeholder="Наприклад: 2048"
+              className="bg-white/10 border-white/10 text-white placeholder:text-neutral-500 focus-visible:ring-cyan-500"
               min="100"
               step="100"
             />
-            <Button
-              variant="outline"
-              onClick={() => setMaxTokens(undefined)}
-              className="border-gray-800 hover:bg-gray-800 text-gray-300"
-            >
-              Reset
-            </Button>
+            <p className="text-xs text-neutral-500 mt-1">
+              Встановіть максимальну кількість токенів для виводу моделі. Залиште порожнім для використання значення за замовчуванням.
+            </p>
           </div>
-          <p className="mt-1 text-xs text-gray-400">
-            Set the maximum number of tokens for the model output. Higher values allow for longer code generation but may take more time. Leave empty to use the model's default.
-          </p>
         </div>
 
-
+        {/* Кнопка */}
+        <div className="flex justify-center">
+          <Button
+            onClick={onGenerate}
+            disabled={!prompt.trim() || !selectedModel}
+            className="px-10 py-4 bg-cyan-500 hover:bg-cyan-400 disabled:bg-cyan-500/50 disabled:cursor-not-allowed transition-all text-black font-bold rounded-xl text-lg shadow-[0_0_20px_#00eaff80] hover:shadow-[0_0_30px_#00eaff]"
+          >
+            ЗГЕНЕРУВАТИ
+          </Button>
+        </div>
       </div>
-
-      <style jsx global>{`
-        @keyframes pulse-slow {
-          0%, 100% {
-            opacity: 0.8;
-          }
-          50% {
-            opacity: 0.6;
-          }
-        }
-
-        .animate-pulse-slow {
-          animation: pulse-slow 8s ease-in-out infinite;
-        }
-
-        @keyframes typing {
-          from { width: 0 }
-          to { width: 100% }
-        }
-
-        .pre-animation {
-          overflow: hidden;
-          white-space: nowrap;
-          width: 0;
-          border-right: 4px solid transparent;
-        }
-
-        .typing-animation {
-          overflow: hidden;
-          white-space: nowrap;
-          border-right: 4px solid #fff;
-          animation:
-            typing 1.75s steps(40, end),
-            blink-caret 0.75s step-end infinite;
-        }
-
-        @keyframes blink-caret {
-          from, to { border-color: transparent }
-          50% { border-color: #fff }
-        }
-      `}</style>
     </div>
   )
 }

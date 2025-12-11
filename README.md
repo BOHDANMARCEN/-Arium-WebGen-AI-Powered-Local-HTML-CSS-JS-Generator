@@ -1,197 +1,321 @@
-# LocalSite AI - now with Thinking Model Support!
+# 🌐 Arium WebGen — AI-Powered Local HTML/CSS/JS Generator
 
-[Watch Demo Video](public/demo.mp4)
+<div align="center">
 
-A modern web application that uses AI to generate HTML, CSS, and JavaScript code based on natural language prompts. Simply describe what you want to build, and the AI will create a complete, self-contained web page for you.
+**Легкий. Швидкий. Локальний. Ідеальний супутник для Arium IDE.**
 
-## Features
+[![Next.js](https://img.shields.io/badge/Next.js-15-black)](https://nextjs.org/)
+[![React](https://img.shields.io/badge/React-19-blue)](https://react.dev/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5-blue)](https://www.typescriptlang.org/)
+[![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
-- **AI-Powered Code Generation**: Generate complete web pages from text descriptions
-- **Live Preview**: See your generated code in action with desktop, tablet, and mobile views
-- **Code Editing**: Edit the generated code directly in the browser
-- **Multiple AI Providers**: Support for DeepSeek, custom OpenAI-compatible APIs, and local models
-- **Responsive Design**: Works on desktop and mobile devices
-- **Modern UI**: Clean, dark-themed interface with a focus on usability
+[Демо](#) • [Документація](#-документація) • [Проблеми](https://github.com/BOHDANMARCEN/-Arium-WebGen-AI-Powered-Local-HTML-CSS-JS-Generator/issues) • [Обговорення](https://github.com/BOHDANMARCEN/-Arium-WebGen-AI-Powered-Local-HTML-CSS-JS-Generator/discussions)
 
-## Tech Stack
+</div>
 
-- [Next.js 15](https://nextjs.org/) with App Router
-- [React 19](https://react.dev/)
-- [Tailwind CSS](https://tailwindcss.com/)
-- [Shadcn UI](https://ui.shadcn.com/)
-- [OpenAI SDK](https://github.com/openai/openai-node) (for API compatibility)
-- [Monaco Editor](https://microsoft.github.io/monaco-editor/)
+---
 
-## Getting Started
+## 📖 Про проєкт
 
-### Prerequisites
+**Arium WebGen** — це сучасний локальний AI-генератор веб-сторінок, який створює повноцінні HTML, CSS та JavaScript-сторінки на основі звичайних текстових описів. Проєкт працює повністю локально (Ollama / LM Studio) або через будь-який OpenAI-сумісний API.
 
-- [Node.js](https://nodejs.org/) (version 18.17 or higher)
-- [npm](https://www.npmjs.com/) or [yarn](https://yarnpkg.com/)
-- [Ollama](https://ollama.com/download/) or [LM Studio](https://lmstudio.ai/) installed 
-- OR an API key from one of the supported providers (see below)
+Це мінімалістичний, швидкий інструмент для розробників, дизайнерів та AI-ентузіастів — а також ключовий компонент екосистеми **Arium**.
 
-### Installation
+### ✨ Основні можливості
 
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/weise25/LocalSite-ai.git
-   cd LocalSite-ai
-   ```
+- 🤖 **AI-генерація веб-сторінок** — Створюй повноцінні веб-сторінки з природних описів
+- 👁️ **Live Preview** — Переглядай результат у реальному часі на різних пристроях (Desktop, Mobile, Tablet)
+- ✏️ **Вбудований редактор коду** — Monaco Editor для редагування коду на льоту
+- 🔌 **Підтримка множини AI-провайдерів** — Ollama, LM Studio, DeepSeek, OpenAI-сумісні API
+- 🧠 **Thinking Models** — Підтримка моделей з міркуваннями (Qwen, DeepCoder тощо)
+- 🎨 **Сучасний UI** — Темний інтерфейс на базі Next.js 15, React 19, Tailwind CSS та shadcn/ui
+- 🐳 **Docker підтримка** — Легкий запуск через Docker контейнер
 
-2. Install the dependencies:
-   ```bash
-   npm install
-   # or
-   yarn install
-   ```
+---
 
-3. Rename the `.env.example` file in the root directory to `.env.local` and add your API key:
-   ```
-   # Choose one of the following providers:
+## 🚀 Швидкий старт
 
-   # DeepSeek API
-   DEEPSEEK_API_KEY=your_deepseek_api_key_here
-   DEEPSEEK_API_BASE=https://api.deepseek.com/v1
+### Вимоги
 
-   # Custom OpenAI-compatible API
-   # OPENAI_COMPATIBLE_API_KEY=your_api_key_here
-   # OPENAI_COMPATIBLE_API_BASE=https://api.openai.com/v1
+- Node.js 20+ або Docker
+- npm, yarn або pnpm
+- (Опціонально) Ollama або LM Studio для локальних моделей
 
-   # Default Provider (deepseek, openai_compatible, ollama, lm_studio)
-   DEFAULT_PROVIDER=lm_studio
-   ```
+### Встановлення
 
-4. Start the development server:
-   ```bash
-   npm run dev
-   # or
-   yarn dev
-   ```
+1. **Клонуйте репозиторій:**
 
-5. Open [http://localhost:3000](http://localhost:3000) in your browser.
+```bash
+git clone https://github.com/BOHDANMARCEN/-Arium-WebGen-AI-Powered-Local-HTML-CSS-JS-Generator.git
+cd -Arium-WebGen-AI-Powered-Local-HTML-CSS-JS-Generator
+```
 
-## Supported AI Providers
+2. **Встановіть залежності:**
 
-### Local Models
+```bash
+npm install
+# або
+yarn install
+# або
+pnpm install
+```
+
+3. **Налаштуйте змінні оточення:**
+
+Створіть файл `.env.local` в корені проєкту:
+
+```env
+# DeepSeek Configuration
+DEEPSEEK_API_KEY=your_deepseek_api_key
+DEEPSEEK_API_BASE=https://api.deepseek.com/v1
+
+# Local Providers (Ollama)
+OLLAMA_API_BASE=http://localhost:11434
+
+# Local Providers (LM Studio)
+LM_STUDIO_API_BASE=http://localhost:1234/v1
+
+# Custom OpenAI-compatible API
+# OPENAI_COMPATIBLE_API_KEY=your_key_here
+# OPENAI_COMPATIBLE_API_BASE=https://api.provider.com/v1
+
+# Default Provider (ollama, lm_studio, deepseek, openai_compatible)
+DEFAULT_PROVIDER=lm_studio
+```
+
+4. **Запустіть проєкт:**
+
+```bash
+npm run dev
+# або
+yarn dev
+# або
+pnpm dev
+```
+
+5. **Відкрийте браузер:**
+
+Перейдіть на [http://localhost:3000](http://localhost:3000)
+
+---
+
+## 🐳 Docker
+
+### Запуск через Docker
+
+```bash
+docker build -t arium-webgen .
+docker run -p 3000:3000 \
+  -e DEFAULT_PROVIDER=lm_studio \
+  -e OLLAMA_API_BASE=http://host.docker.internal:11434 \
+  -e LM_STUDIO_API_BASE=http://host.docker.internal:1234/v1 \
+  arium-webgen
+```
+
+### Docker Compose
+
+```yaml
+version: '3.8'
+services:
+  webgen:
+    build: .
+    ports:
+      - "3000:3000"
+    environment:
+      - DEFAULT_PROVIDER=lm_studio
+      - OLLAMA_API_BASE=http://host.docker.internal:11434
+      - LM_STUDIO_API_BASE=http://host.docker.internal:1234/v1
+```
+
+---
+
+## 🧠 Підтримувані провайдери
+
+### 🔸 Локальні моделі
 
 #### Ollama
-
-1. Install [Ollama](https://ollama.ai/) on your local machine.
-2. Pull a model like `llama2` or `codellama`.
-3. Start the Ollama server.
-4. Set in your `.env.local` file:
-   ```
-   OLLAMA_API_BASE=http://localhost:11434
-   DEFAULT_PROVIDER=ollama
-   ```
+- **Опис:** Локальні AI-моделі через Ollama
+- **Налаштування:** Встановіть [Ollama](https://ollama.ai/) та запустіть сервер
+- **API Base:** `http://localhost:11434`
+- **API Key:** Не потрібен
 
 #### LM Studio
+- **Опис:** Локальні AI-моделі через LM Studio
+- **Налаштування:** Встановіть [LM Studio](https://lmstudio.ai/) та запустіть локальний сервер
+- **API Base:** `http://localhost:1234/v1`
+- **API Key:** Не потрібен
 
-1. Install [LM Studio](https://lmstudio.ai/) on your local machine.
-2. Download a model and start the local server.
-3. Set in your `.env.local` file:
-   ```
-   LM_STUDIO_API_BASE=http://localhost:1234/v1
-   DEFAULT_PROVIDER=lm_studio
-   ```
+### 🔸 Хмарні провайдери
 
-### DeepSeek
+#### DeepSeek
+- **Опис:** AI-моделі від DeepSeek
+- **Налаштування:** Отримайте API ключ на [DeepSeek](https://www.deepseek.com/)
+- **API Base:** `https://api.deepseek.com/v1`
+- **API Key:** Потрібен
 
-1. Visit [DeepSeek](https://platform.deepseek.com) and create an account or sign in.
-2. Navigate to the API keys section.
-3. Create a new API key and copy it.
-4. Set in your `.env.local` file:
-   ```
-   DEEPSEEK_API_KEY=your_deepseek_api_key
-   DEEPSEEK_API_BASE=https://api.deepseek.com/v1
-   ```
+#### Custom OpenAI-compatible API
+- **Опис:** Будь-який OpenAI-сумісний API
+- **Підтримувані сервіси:** OpenAI, Together AI, Anyscale, Groq, Claude AI, Anthropic та інші
+- **Налаштування:** Вкажіть базовий URL та API ключ у `.env.local`
 
-### Custom OpenAI-compatible API
+---
 
-You can use any OpenAI-compatible API:
+## 🛠 Як користуватись
 
-1. Obtain an API key from your desired provider (OpenAI, Together AI, Groq, etc.).
-2. Set in your `.env.local` file:
-   ```
-   OPENAI_COMPATIBLE_API_KEY=your_api_key
-   OPENAI_COMPATIBLE_API_BASE=https://api.of.provider.com/v1
-   ```
+### Базове використання
 
-## Deployment
+1. **Введіть опис веб-сторінки**
+   - Наприклад: "Створи лендінг для мобільного застосунку у фіолетових тонах з анімаціями"
 
-### Deploying on Vercel
+2. **Оберіть AI-провайдера та модель**
+   - Виберіть провайдера (Ollama, LM Studio, DeepSeek тощо)
+   - Оберіть модель з доступних
 
-[Vercel](https://vercel.com) is the recommended platform for hosting your Next.js application:
+3. **Налаштуйте параметри (опціонально)**
+   - Системний промпт (default, thinking, custom)
+   - Максимальна кількість токенів
 
-1. Create an account on Vercel and connect it to your GitHub account.
-2. Import your repository.
-3. Add the environment variables for your desired provider, e.g.:
-   - `DEEPSEEK_API_KEY`
-   - `DEEPSEEK_API_BASE`
-   - `DEFAULT_PROVIDER`
-4. Click "Deploy".
+4. **Натисніть GENERATE**
+   - AI почне генерувати код у реальному часі
+   - Для thinking моделей ви побачите процес міркування
 
-### Other Hosting Options
+5. **Переглядайте та редагуйте**
+   - Переглядайте результат у Live Preview
+   - Редагуйте код у вбудованому редакторі
+   - Перемикайтеся між Desktop, Mobile та Tablet режимами
 
-The application can also be deployed on:
-- [Netlify](https://netlify.com)
-- [Cloudflare Pages](https://pages.cloudflare.com)
-- Any platform that supports Next.js applications
+6. **Експортуйте результат**
+   - Копіюйте код або зберігайте локально
 
-**Keep in Mind that if you host it on a platform, (like Vercel, Netlify, etc.) you can not use local models through Ollama or LM Studio, unless using something like Tunneling via [ngrok](https://ngrok.com).**
+### Розширені можливості
 
-## Usage
+- **Thinking Models:** Використовуйте моделі з міркуваннями для кращого розуміння процесу генерації
+- **Custom System Prompts:** Створюйте власні системні промпти для специфічних завдань
+- **Token Limits:** Налаштуйте максимальну кількість токенів для контролю довжини відповіді
 
-1. Enter a prompt describing what kind of website you want to create.
-2. Select an AI provider and model from the dropdown menu.
-3. Click "GENERATE".
-4. Wait for the code to be generated.
-5. View the live preview and adjust the viewport (Desktop, Tablet, Mobile).
-6. Toggle edit mode to modify the code if needed.
-7. Copy the code or download it as an HTML file.
+---
 
-## Roadmap
+## 📁 Структура проєкту
 
-### AI Models and Providers
-- [x] Integration with [Ollama](https://ollama.ai) for local model execution
-- [x] Support for [LM Studio](https://lmstudio.ai) to use local models
-- [x] Predefined provider: DeepSeek
-- [x] Custom OpenAI-compatible API support
-- [x] Support thinking models (Qwen3,DeepCoder, etc.)
-- [ ] Adding more predefined providers (Anthropic, Groq, etc.)
+```
+Arium-WebGen/
+├── app/                    # Next.js App Router
+│   ├── api/               # API routes
+│   │   ├── generate-code/ # Генерація коду
+│   │   ├── get-models/    # Отримання моделей
+│   │   └── get-default-provider/
+│   ├── layout.tsx         # Root layout
+│   └── page.tsx           # Головна сторінка
+├── components/            # React компоненти
+│   ├── ui/               # shadcn/ui компоненти
+│   ├── code-editor.tsx   # Monaco Editor
+│   ├── generation-view.tsx
+│   ├── welcome-view.tsx
+│   └── ...
+├── lib/                  # Утиліти та конфігурація
+│   ├── providers/        # Конфігурація провайдерів
+│   └── utils.ts
+├── public/               # Статичні файли
+├── Dockerfile           # Docker конфігурація
+├── package.json
+└── README.md
+```
 
-### Advanced Code Generation
-- [ ] Choose between different Frameworks and Libraries (React, Vue, Angular, etc.)
-- [ ] File-based code generation (multiple files)
-- [ ] Save and load projects
-- [ ] Agentic diff-editing capabilities
+---
 
-### UI/UX Improvements
-- [ ] Dark/Light theme toggle
-- [ ] Customizable code editor settings
-- [ ] Drag-and-drop interface for UI components
-- [ ] History of generated code
+## 🗺 Roadmap
 
-### Accessibility
-- [ ] Transcription and voice input for prompts
-- [ ] Anything; feel free to make suggestions 
+### 🧩 Моделі та провайдери
 
-### Desktop App
-- [ ] Turning into a cross-platform desktop app (Electron)
+- [x] Ollama support
+- [x] LM Studio support
+- [x] DeepSeek
+- [x] OpenAI-compatible API
+- [x] Thinking Models Support (Qwen, DeepCoder, тощо)
+- [ ] Anthropic Claude
+- [ ] Groq
+- [ ] Together AI
+- [ ] Perplexity
 
+### 🧱 Генерація коду
 
-## Contributing
+- [ ] Багатофайлова структура (index.html, style.css, app.js)
+- [ ] ZIP-експорт проєктів
+- [ ] Agentic diff-editing
+- [ ] Проекти: зберігання / історія
+- [ ] Версіонування згенерованого коду
 
-Contributions are welcome! Please feel free to submit a Pull Request.
+### 🎨 Інтерфейс
 
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add some amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
+- [ ] Світла тема
+- [ ] Персональні налаштування редактора
+- [ ] Drag-and-drop UI компонентів
+- [ ] Темплейти та приклади
+- [ ] Історія генерацій
 
-## License
+### 💻 Desktop-версія
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+- [ ] Electron-додаток
+- [ ] Нативні сповіщення
+- [ ] Офлайн режим
 
+### 🔧 Інструменти розробника
+
+- [ ] CLI версія
+- [ ] VS Code розширення
+- [ ] API для інтеграцій
+
+---
+
+## 🤝 Внесок у проєкт
+
+Ми вітаємо внески! Будь ласка, прочитайте [CONTRIBUTING.md](CONTRIBUTING.md) для деталей про наш кодекс поведінки та процес надсилання pull requests.
+
+### Як внести свій внесок
+
+1. Fork проєкт
+2. Створіть feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit зміни (`git commit -m 'Add some AmazingFeature'`)
+4. Push до branch (`git push origin feature/AmazingFeature`)
+5. Відкрийте Pull Request
+
+---
+
+## 📚 Документація
+
+- [Налаштування провайдерів](docs/PROVIDERS.md)
+- [API документація](docs/API.md)
+- [Розробка](docs/DEVELOPMENT.md)
+
+---
+
+## 🐛 Проблеми та підтримка
+
+Якщо ви знайшли помилку або маєте пропозицію, будь ласка:
+- Перевірте [існуючі issues](https://github.com/BOHDANMARCEN/-Arium-WebGen-AI-Powered-Local-HTML-CSS-JS-Generator/issues)
+- Створіть [новий issue](https://github.com/BOHDANMARCEN/-Arium-WebGen-AI-Powered-Local-HTML-CSS-JS-Generator/issues/new) з детальним описом
+
+---
+
+## 📄 Ліцензія
+
+Цей проєкт ліцензовано під MIT License - дивіться файл [LICENSE](LICENSE) для деталей.
+
+---
+
+## 🙏 Подяки
+
+- [Next.js](https://nextjs.org/) за чудовий фреймворк
+- [shadcn/ui](https://ui.shadcn.com/) за компоненти UI
+- [Monaco Editor](https://microsoft.github.io/monaco-editor/) за редактор коду
+- Всі контриб'ютори та користувачі проєкту
+
+---
+
+<div align="center">
+
+**Зроблено з ❤️ для спільноти розробників**
+
+[⭐ Поставити зірку](https://github.com/BOHDANMARCEN/-Arium-WebGen-AI-Powered-Local-HTML-CSS-JS-Generator) • [🐛 Повідомити про помилку](https://github.com/BOHDANMARCEN/-Arium-WebGen-AI-Powered-Local-HTML-CSS-JS-Generator/issues) • [💬 Обговорення](https://github.com/BOHDANMARCEN/-Arium-WebGen-AI-Powered-Local-HTML-CSS-JS-Generator/discussions)
+
+</div>

@@ -26,10 +26,13 @@ export async function GET(request: NextRequest) {
     // Return the list of models as JSON response
     return NextResponse.json(models);
   } catch (error) {
-    console.error('Error fetching models:', error);
-
-    // Return a more specific error message if available
+    // Only log unexpected errors, not connection errors for unconfigured providers
     const errorMessage = error instanceof Error ? error.message : 'Error fetching models';
+    
+    // Don't log expected connection errors (they're handled gracefully in the UI)
+    if (!errorMessage.includes('Cannot connect') && !errorMessage.includes('API key not configured')) {
+      console.error('Error fetching models:', error);
+    }
 
     return NextResponse.json(
       { error: errorMessage },

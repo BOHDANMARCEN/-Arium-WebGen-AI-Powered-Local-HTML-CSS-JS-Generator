@@ -1,0 +1,27 @@
+{
+  "name": "test-site",
+  "version": "0.1.0",
+  "pages": [
+    {
+      "path": "index.html",
+      "title": "Home",
+      "components": [
+        "header",
+        "hero",
+        "footer"
+      ]
+    },
+    {
+      "path": "about.html",
+      "title": "About",
+      "components": [
+        "header",
+        "footer"
+      ]
+    }
+  ],
+  "componentsDir": "components",
+  "assetsDir": "assets",
+  "theme": "theme.json",
+  "uiFramework": null
+}

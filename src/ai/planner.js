@@ -7,12 +7,18 @@ export function planCreateLanding(params = {}) {
     sections = ['hero', 'features', 'pricing', 'testimonials', 'footer']
   } = params;
 
+  // Ensure footer is only added once
+  const allComponents = ['header', ...sections];
+  if (!allComponents.includes('footer')) {
+    allComponents.push('footer');
+  }
+  
   return {
     pages: [
       { 
         path: 'index.html', 
         title: title, 
-        components: ['header', ...sections, 'footer'] 
+        components: allComponents
       },
       { 
         path: 'pricing.html', 

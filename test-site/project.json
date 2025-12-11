@@ -8,8 +8,55 @@
       "components": [
         "header",
         "hero",
+        "problem",
+        "solution",
+        "features",
+        "testimonials",
+        "pricing",
+        "cta",
         "footer"
-      ]
+      ],
+      "semantic": {
+        "type": "landing",
+        "sections": [
+          {
+            "role": "navigation",
+            "required": true
+          },
+          {
+            "role": "hero",
+            "required": true
+          },
+          {
+            "role": "problem",
+            "required": false
+          },
+          {
+            "role": "solution",
+            "required": false
+          },
+          {
+            "role": "features",
+            "required": false
+          },
+          {
+            "role": "testimonials",
+            "required": false
+          },
+          {
+            "role": "pricing",
+            "required": false
+          },
+          {
+            "role": "cta",
+            "required": true
+          },
+          {
+            "role": "footer",
+            "required": true
+          }
+        ]
+      }
     },
     {
       "path": "about.html",
@@ -18,10 +65,142 @@
         "header",
         "footer"
       ]
+    },
+    {
+      "path": "pricing.html",
+      "title": "Pricing",
+      "components": [
+        "header",
+        "pricing",
+        "footer"
+      ],
+      "semantic": {
+        "type": "pricing",
+        "sections": [
+          {
+            "role": "navigation",
+            "required": true
+          },
+          {
+            "role": "pricing",
+            "required": true
+          },
+          {
+            "role": "footer",
+            "required": true
+          }
+        ]
+      }
     }
   ],
   "componentsDir": "components",
   "assetsDir": "assets",
   "theme": "theme.json",
-  "uiFramework": null
+  "uiFramework": null,
+  "semantic": {
+    "structure": {
+      "type": "landing",
+      "sections": [
+        {
+          "role": "navigation",
+          "required": true
+        },
+        {
+          "role": "hero",
+          "required": true
+        },
+        {
+          "role": "problem",
+          "required": false
+        },
+        {
+          "role": "solution",
+          "required": false
+        },
+        {
+          "role": "features",
+          "required": false
+        },
+        {
+          "role": "testimonials",
+          "required": false
+        },
+        {
+          "role": "pricing",
+          "required": false
+        },
+        {
+          "role": "cta",
+          "required": true
+        },
+        {
+          "role": "footer",
+          "required": true
+        }
+      ],
+      "metadata": {
+        "createdAt": "2025-12-11T03:41:14.392Z",
+        "version": "1.0.0",
+        "style": "modern",
+        "tone": "professional",
+        "persona": null,
+        "generatedFrom": "create modern SaaS landing with hero, features, pricing"
+      }
+    },
+    "components": [
+      {
+        "role": "navigation",
+        "component": "header",
+        "required": true
+      },
+      {
+        "role": "hero",
+        "component": "hero",
+        "required": true
+      },
+      {
+        "role": "problem",
+        "component": "problem",
+        "required": false
+      },
+      {
+        "role": "solution",
+        "component": "solution",
+        "required": false
+      },
+      {
+        "role": "features",
+        "component": "features",
+        "required": false
+      },
+      {
+        "role": "testimonials",
+        "component": "testimonials",
+        "required": false
+      },
+      {
+        "role": "pricing",
+        "component": "pricing",
+        "required": false
+      },
+      {
+        "role": "cta",
+        "component": "cta",
+        "required": true
+      },
+      {
+        "role": "footer",
+        "component": "footer",
+        "required": true
+      }
+    ],
+    "metadata": {
+      "createdAt": "2025-12-11T03:41:14.392Z",
+      "version": "1.0.0",
+      "style": "modern",
+      "tone": "professional",
+      "persona": null,
+      "generatedFrom": "create modern SaaS landing with hero, features, pricing"
+    }
+  }
 }

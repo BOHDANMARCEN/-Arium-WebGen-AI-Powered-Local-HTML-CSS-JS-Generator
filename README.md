@@ -345,6 +345,7 @@ We welcome contributions! Please read [CONTRIBUTING.md](CONTRIBUTING.md) for det
 
 - [Architecture 3.0](docs/ARCHITECTURE.md) - Comprehensive architecture document with diagrams and implementation plan
 - [Architecture 3.0 Starter Code](docs/ARCHITECTURE_3_STARTER.md) - Full project description with ready-to-use starter code
+- [Unique Features](docs/UNIQUE_FEATURES.md) - 15 unique features beyond Webflow/Tilda
 - [CLI Documentation](CLI_README.md) - Command-line interface guide
 - [Migration Guide](docs/MIGRATION.md) - Migrating from 2.0 to 3.0
 - [Provider Setup](docs/PROVIDERS.md)

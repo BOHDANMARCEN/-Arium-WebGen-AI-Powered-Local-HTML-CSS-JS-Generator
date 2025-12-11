@@ -466,6 +466,28 @@ arium deploy --provider=vercel --token=xxx
 
 ---
 
+## 21. Unique Features (Beyond Webflow/Tilda)
+
+See [UNIQUE_FEATURES.md](UNIQUE_FEATURES.md) for detailed description of 15 unique features that differentiate Arium WebGen from competitors:
+
+1. Semantic AI Layout Engine
+2. Live Token Editing
+3. Full Multilingual Auto-Sites
+4. Arium Script Language
+5. AI Visual Designer
+6. Quality Gates System
+7. Dynamic Content Engine
+8. AI Motion Engine
+9. Style Extraction AI
+10. Automatic Content Generation
+11. AI Debugger
+12. Command Mode Integration
+13. Offline AI Models
+14. AI Persona Designer
+15. Zero-Knowledge Templates
+
+---
+
 *Last updated: 2025-01-11*
 *Version: 3.0.0-alpha*
 

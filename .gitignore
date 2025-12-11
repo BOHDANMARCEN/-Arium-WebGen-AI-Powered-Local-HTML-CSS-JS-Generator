@@ -38,3 +38,7 @@ unused-components.md
 dist/
 .arium/
 *.log
+
+# Test projects (keep examples/)
+test-site/
+test-*/

@@ -91,6 +91,7 @@ Open [http://localhost:3000](http://localhost:3000) to use the web interface.
 
 Use the command-line interface for project management:
 
+**Using npm scripts:**
 ```bash
 # Initialize a new project
 npm run cli -- init my-site
@@ -103,7 +104,21 @@ npm run cli -- build
 npm run cli -- preview
 ```
 
-See [CLI_README.md](CLI_README.md) for full CLI documentation.
+**Using Windows batch files (Windows only):**
+```batch
+# Initialize a new project
+arium-init.bat my-site
+
+# Build project
+cd my-site
+..\arium-build.bat
+
+# Start preview server
+..\arium-preview.bat
+```
+
+See [CLI_README.md](CLI_README.md) for full CLI documentation.  
+See [README_BAT.md](README_BAT.md) for Windows batch file usage.
 
 3. **Configure environment variables:**
 
